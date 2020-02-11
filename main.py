@@ -3,7 +3,7 @@ from telebot.util import async_dec
 from database import Event, session
 from time import sleep
 from datetime import datetime, timedelta
-from settings import token, chat_id, bot_name
+from local_settings import token, chat_id, bot_name
 
 
 bot = telebot.TeleBot(token)
