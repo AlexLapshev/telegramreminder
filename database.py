@@ -11,7 +11,6 @@ engine = create_engine('sqlite:///events.db',
                     poolclass=StaticPool)
 
 
-# engine = create_engine('sqlite:///events.db', echo=False, check_same_thread=False)
 Base = declarative_base()
 
 
