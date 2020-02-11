@@ -24,6 +24,8 @@ days = [
 @bot.message_handler(commands=['start', 'remove', 'timetable', 'help', 'timetable_all', ])
 @async_dec()
 def get_text_message(message):
+	print(message)
+
 	if message.chat.id != chat_id:
 		bot.send_message(message.chat.id, 'Вам недоступен этот бот.')
 	else:
@@ -87,6 +89,7 @@ def get_date(message):
 		bot.send_message(chat_id, 'Событие: {} \nВремя: {} {}'.format(title, day, str(date)[:-3]))
 	except Exception as e:
 		print(e)
+		print('Ошибка')
 		bot.send_message(chat_id, 'Неверный формат даты, введи /start или /timetable.')
 
 
@@ -100,6 +103,10 @@ def cycle_db():
 				date = datetime.strptime(elem.date, "%Y-%m-%d %H:%M:%S").replace(second=0)
 
 				if (date - timedelta(hours=3)) == now:
+					reminder(elem, date)
+					sleep(60)
+
+				elif (date - timedelta(days=1)) == now:
 					reminder(elem, date)
 					sleep(60)
 
