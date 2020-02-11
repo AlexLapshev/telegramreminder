@@ -62,7 +62,9 @@ def remove(message):
 
 def timetable():
 	for ev in Event.get_future():
-		bot.send_message(chat_id, ev)
+		date = datetime.strptime(ev.date, "%Y-%m-%d %H:%M:%S").replace(second=0)
+		day = days[datetime.weekday(date)]
+		bot.send_message(chat_id, 'Событие: {}\nВремя: {} {}'.format(ev.title, day, ev.date[:-3]))
 
 
 def timetable_all():
